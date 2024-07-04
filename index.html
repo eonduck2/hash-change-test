@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Tab Menu with Hash</title>
+    <style>
+      .tabs {
+        display: flex;
+      }
+      .tab {
+        padding: 10px;
+        cursor: pointer;
+        background: lightgray;
+        margin-right: 5px;
+      }
+      .tab.active {
+        background: gray;
+        color: white;
+      }
+      .content {
+        display: none;
+        padding: 20px;
+        border: 1px solid #ccc;
+      }
+      .content.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tabs">
+      <div id="tab1" class="tab">Tab 1</div>
+      <div id="tab2" class="tab">Tab 2</div>
+      <div id="tab3" class="tab">Tab 3</div>
+    </div>
+    <div id="content1" class="content">Content 1</div>
+    <div id="content2" class="content">Content 2</div>
+    <div id="content3" class="content">Content 3</div>
+  </body>
+  <script>
+    document.querySelectorAll(".tab").forEach((element) => {
+      element.onclick = () => {
+        window.location.hash = element.id;
+        element.classList.add("active");
+      };
+    });
+
+    window.addEventListener("hashchange", () => {
+      document.querySelectorAll(".tab").forEach((element) => {
+        const hash = window.location.hash;
+        if (element.id !== hash.substring(1)) {
+          element.classList.remove("active");
+        } else if (hash && element.id) {
+          console.log(hash);
+        }
+      });
+    });
+  </script>
+</html>
